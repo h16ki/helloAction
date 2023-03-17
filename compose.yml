@@ -1,7 +1,8 @@
 services:
   action_test:
     container_name: action-test
-    image: sharelatex/sharelatex-base
+    # image: sharelatex/sharelatex-base
+    build: .
     platform: linux/amd64
     env_file:
       - .env
