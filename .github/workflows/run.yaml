@@ -1,7 +1,20 @@
-name: learn-github-actions
-on: [push]
+name: github-action-by-docker
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  check-bats-version:
-    runs-on: sharelatex/sharelatex:latest
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - run: latex -v
+      - uses: actions/checkout@v3
+
+      - name: Checkout and build
+        shell: bash
+        env:
+          VAL: ${{ secrets.VALUE }}
+        run: |
+          docker-compose up -d
+          echo "test"
