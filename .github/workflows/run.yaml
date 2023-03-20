@@ -20,5 +20,8 @@ jobs:
           docker compose build --no-cache
           docker compose up -d
 
-      - name: Releas
-        uses: softprops/action-gh-release@v1
+      - name: Release
+        run: |
+          git add ./build
+          git commit -m "build by github actions"
+          git push origin main
