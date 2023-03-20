@@ -3,7 +3,8 @@ name: latex_compile
 on:
   push:
     branches:
-      - release
+    #   - release
+    - main
 
 jobs:
   build:
