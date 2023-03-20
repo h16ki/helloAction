@@ -21,7 +21,6 @@ jobs:
           docker compose up -d
 
       - name: Release
-        run: |
-          docker compose exec action_test git add ./build
-          docker compose exec action_test git commit -m "build by github actions"
-          docker compose exec action_test git push origin main
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./build/main.pdf
