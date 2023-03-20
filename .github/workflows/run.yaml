@@ -22,6 +22,6 @@ jobs:
 
       - name: Release
         run: |
-          git add ./build
-          git commit -m "build by github actions"
-          git push origin main
+          docker compose exec action_test git add ./build
+          docker compose exec action_test git commit -m "build by github actions"
+          docker compose exec action_test git push origin main
