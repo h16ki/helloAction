@@ -22,6 +22,6 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
-        tag: ${{ steps.tag_version.outputs.new_tag }}
         with:
           files: ./build/main.pdf
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
