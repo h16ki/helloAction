@@ -12,10 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Checkout and build
+      - name: Build
         shell: bash
         env:
           VAL: ${{ secrets.VALUE }}
         run: |
           docker compose build --no-cache
           docker compose up -d
+
+      - name: Releas
+        uses: softprops/action-gh-release@v1
