@@ -1,3 +1,6 @@
 FROM sharelatex/sharelatex-base
 
-# COPY .env ./
+WORKDIR /workspace
+# COPY ./src .
+
+# ENTRYPOINT [ "lualatex" "./main.tex" ]

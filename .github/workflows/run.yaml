@@ -3,7 +3,7 @@ name: github-action-by-docker
 on:
   push:
     branches:
-      - main
+      - release
 
 jobs:
   build:
@@ -16,5 +16,5 @@ jobs:
         env:
           VAL: ${{ secrets.VALUE }}
         run: |
-          docker-compose up -d
-          echo "test"
+          docker compose build --no-cache
+          docker compose up -d

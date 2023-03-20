@@ -4,5 +4,15 @@ services:
     # image: sharelatex/sharelatex-base
     build: .
     platform: linux/amd64
-    # env_file:
-    #   - .env
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    tty: true
+    command: sh './entrypoint.sh'
+    environment:
+      - LATEX_MAIN_FILENAME=main
+      - LATEX_BASEDIR=src
+      - LATEX_OUTPUT_DIR=build
+      - IMAGE_DIR=images
+      - BIBTEX_FILENAME=refs
+      - LATEX_ENGINE=pdflatex
