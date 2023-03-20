@@ -1,4 +1,4 @@
-name: github-action-by-docker
+name: latex_compile
 
 on:
   push:
