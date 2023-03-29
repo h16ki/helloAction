@@ -12,12 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-        echo "Hello Github actions!" > hello.txt
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add ./hello.txt
-        git commit -m "Github actions generated"
-        git push
+          echo "Hello Github actions!" > hello.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add ./hello.txt
+          git commit -m "Github actions generated"
+          git push
 
       # - name: Build
       #   shell: bash
