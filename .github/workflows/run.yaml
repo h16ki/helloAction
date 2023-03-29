@@ -11,22 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Build
+        shell: bash
+      #   env:
+      #     VAL: ${{ secrets.VALUE }}
+        run: |
+          docker compose build --no-cache
+          docker compose up -d
+
+      - name: Release
       - run: |
           echo "Hello Github actions!" > hello.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add ./hello.txt
+          git add ./build/main.pdf
           git commit -m "Github actions generated"
           git push
-
-      # - name: Build
-      #   shell: bash
-      #   env:
-      #     VAL: ${{ secrets.VALUE }}
-      #   run: |
-      #     docker compose build --no-cache
-      #     docker compose up -d
-
       # - name: Generate release tag
       #   id: tag
       #   run: |
