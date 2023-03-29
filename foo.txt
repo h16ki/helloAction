@@ -7,4 +7,5 @@ Dockerfile
 README.md
 compose.yml
 entrypoint.sh
+foo.txt
 src
