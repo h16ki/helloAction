@@ -1,32 +1,39 @@
 name: latex_compile
 
-on:
-  push:
-    branches:
+on: push
+  # push:
+    # branches:
     #   - release
-    - main
+    # - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: |
+        echo "Hello Github actions!" > hello.txt
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add ./hello.txt
+        git commit -m "Github actions generated"
+        git push
 
-      - name: Build
-        shell: bash
-        env:
-          VAL: ${{ secrets.VALUE }}
-        run: |
-          docker compose build --no-cache
-          docker compose up -d
+      # - name: Build
+      #   shell: bash
+      #   env:
+      #     VAL: ${{ secrets.VALUE }}
+      #   run: |
+      #     docker compose build --no-cache
+      #     docker compose up -d
 
-      - name: Generate release tag
-        id: tag
-        run: |
-          echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
+      # - name: Generate release tag
+      #   id: tag
+      #   run: |
+      #     echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ./build/main.pdf
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     files: ./build/main.pdf
+      #     tag_name: ${{ steps.tag.outputs.release_tag }}
