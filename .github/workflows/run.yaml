@@ -8,13 +8,15 @@ on: push
 
         #   docker compose build --no-cache
         #   docker compose up -d
+          # echo "Hello Github actions!" > hello.txt
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: |
-          echo "Hello Github actions!" > hello.txt
+          docker compose build --no-cache
+          docker compose up -d
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add ./build/main.pdf
