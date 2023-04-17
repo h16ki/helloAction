@@ -7,7 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Docker Compose
+        uses: docker/compose-cli-action@v0.1.1
       - name: Build PDF
         run: |
           docker compose up -d
