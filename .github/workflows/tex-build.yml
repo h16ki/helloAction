@@ -1,0 +1,26 @@
+name: Build PDF
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build PDF
+        run: |
+          docker-compose up -d
+          docker-compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
+          docker-compose exec -w /src -T tex bibtex main
+          docker-compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
+          docker-compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
+          docker-compose exec -w /src -T zip -r intermediate-files.zip *.aux *.log *.bbl *.blg
+          git add intermediate-files.zip
+          git commit -m "Add intermediate files"
+          git push
+      - name: Save PDF
+        uses: actions/upload-artifact@v2
+        with:
+          name: main
+          path: main.pdf
