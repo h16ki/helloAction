@@ -1,5 +1,5 @@
 services:
-  action_test:
+  tex:
     container_name: action-test
     image: sharelatex/sharelatex-base
 #     build: .
