@@ -10,12 +10,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build PDF
         run: |
-          docker-compose up -d
-          docker-compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
-          docker-compose exec -w /src -T tex bibtex main
-          docker-compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
-          docker-compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
-          docker-compose exec -w /src -T zip -r intermediate-files.zip *.aux *.log *.bbl *.blg
+          docker compose up -d
+          docker compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
+          docker compose exec -w /src -T tex bibtex main
+          docker compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
+          docker compose exec -w /src -T tex pdflatex -interaction=nonstopmode main.tex
+          docker compose exec -w /src -T zip -r intermediate-files.zip *.aux *.log *.bbl *.blg
           git add intermediate-files.zip
           git commit -m "Add intermediate files"
           git push
