@@ -1,39 +1,8 @@
 services:
-  tex:
-    container_name: action-test
-    image: sharelatex/sharelatex-base
-#     build: .
-#     platform: linux/amd64
+  typst:
+    image: rust:latest
+    container_name: typst-station
+    tty: true
     working_dir: /workspace
     volumes:
       - .:/workspace
-    tty: true
-    restart: always
-    command: sh './entrypoint.sh'
-    environment:
-      - LATEX_MAIN_FILENAME=main
-      - LATEX_BASEDIR=src
-      - LATEX_OUTPUT_DIR=build
-      - IMAGE_DIR=images
-      - BIBTEX_FILENAME=refs
-      - LATEX_ENGINE=pdflatex
-      
-  deploy:
-    image: "alpine/git:latest"
-    volumes:
-      - .:/workspace
-    environment:
-      GIT_COMMITTER_NAME: GitHub Actions
-      GIT_COMMITTER_EMAIL: actions@github.com
-      GIT_AUTHOR_NAME: GitHub Actions
-      GIT_AUTHOR_EMAIL: actions@github.com
-    command: >
-      sh -c '
-        git config --local user.name "${GIT_AUTHOR_NAME}" &&
-        git config --local user.email "${GIT_AUTHOR_EMAIL}" &&
-        git add . &&
-        git commit -m "Add compiled PDF files" &&
-        git push
-      '
-    depends_on:
-      - tex
