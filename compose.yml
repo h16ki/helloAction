@@ -1,6 +1,6 @@
 services:
   typst:
-    image: rust:latest
+    build: .
     container_name: typst-station
     tty: true
     working_dir: /workspace
