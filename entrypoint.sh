@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Build
+# ----------------------------
 ERROR_OPTIONS="\
   -halt-on-error \
   -interaction=nonstopmode \
@@ -41,3 +43,9 @@ fi
 
 mv $LATEX_MAIN_FILENAME.* $output
 
+# Git add commit push
+git config user.name github-actions
+git config user.email github-actions@github.com
+git add ./build/main.tex
+git commit -m " generated"
+git push
